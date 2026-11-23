@@ -25,7 +25,7 @@ I test ideas on free data and report what holds up, including when nothing does.
 
 ### Libraries, checked against independent code
 
-Stochastic volatility, rough volatility, stochastic rates, exotic Monte Carlo, Malliavin Greeks, mean field games for order books, ergodic BSDEs, optimal transport and path signatures. Checking them against closed forms and independent implementations found and fixed real bugs in five of them.
+Stochastic volatility, rough volatility, stochastic rates, exotic Monte Carlo, Malliavin Greeks, mean field games for order books, ergodic BSDEs, optimal transport and path signatures. Checking them against closed forms and independent implementations found and fixed real bugs in six of them.
 
 ### How I use AI
 
@@ -33,6 +33,7 @@ Most of the code here was written with an AI coding assistant (Claude Code), and
 
 - **What I decide:** the question, the data, and the pass or fail rule, written down before results exist (pre-registered hypotheses in behavioral-pricing-kernel, a locked holdout in sentinel).
 - **What I require:** every number in a README is written by code, and CI fails if the page and the results disagree.
-- **What checking found:** five bugs in the math libraries by comparing them with closed forms and independent code (COS pricing that blew up on long maturities, an inexact Wasserstein distance, a wrong log-signature, a sign error in the HJB solver, a local vol argument that was silently ignored); two overstated t-statistics (overlapping 13F windows, bunched VaR exceptions); a look-ahead in pairs selection; and a VIX comparison that was circular by construction. Each fix is a pull request with the before and after numbers.
+- **What checking found:** five bugs in the math libraries by comparing them with closed forms and independent code (COS pricing that blew up on long maturities, an inexact Wasserstein distance, a wrong log-signature, a sign error in the HJB solver, a local vol argument that was silently ignored); two overstated t-statistics (overlapping 13F windows, bunched VaR exceptions); a look-ahead in pairs selection; and a VIX comparison that was circular by construction. A second audit of every repository against the literature found twelve more, among them recoveries counted twice in a credit waterfall, a power plant valued with perfect foresight, a deflated Sharpe hurdle on the wrong time scale and a Basel capital charge on the wrong horizon. Each fix is a pull request with the before and after numbers.
+- **Testing the AI itself:** in fed-sentiment-risk-monitor a small open language model, run locally, dates FOMC statements it could have read in training (0.22 probability on the true year against 0.06 by chance) but cannot recall the bond market move on the day (AUC 0.51). Its knowledge stops where its training data ends, so any backtest of a language model signal has to start after that point.
 
 GitHub: [rxj0102](https://github.com/rxj0102) · Site: [rxj0102.github.io](https://rxj0102.github.io)
