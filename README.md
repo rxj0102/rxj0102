@@ -27,4 +27,12 @@ I test ideas on free data and report what holds up, including when nothing does.
 
 Stochastic volatility, rough volatility, stochastic rates, exotic Monte Carlo, Malliavin Greeks, mean field games for order books, ergodic BSDEs, optimal transport and path signatures. Checking them against closed forms and independent implementations found and fixed real bugs in five of them.
 
+### How I use AI
+
+Most of the code here was written with an AI coding assistant (Claude Code), and the commits say so. I treat its output the way a research desk treats a new signal: it has to pass a test I set before I believe it.
+
+- **What I decide:** the question, the data, and the pass or fail rule, written down before results exist (pre-registered hypotheses in behavioral-pricing-kernel, a locked holdout in sentinel).
+- **What I require:** every number in a README is written by code, and CI fails if the page and the results disagree.
+- **What checking found:** five bugs in the math libraries by comparing them with closed forms and independent code (COS pricing that blew up on long maturities, an inexact Wasserstein distance, a wrong log-signature, a sign error in the HJB solver, a local vol argument that was silently ignored); two overstated t-statistics (overlapping 13F windows, bunched VaR exceptions); a look-ahead in pairs selection; and a VIX comparison that was circular by construction. Each fix is a pull request with the before and after numbers.
+
 GitHub: [rxj0102](https://github.com/rxj0102) · Site: [rxj0102.github.io](https://rxj0102.github.io)
