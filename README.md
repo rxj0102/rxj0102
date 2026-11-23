@@ -9,7 +9,7 @@ I test ideas on free data and report what holds up, including when nothing does.
 | Repo | Question | Answer |
 |---|---|---|
 | [var-confidence-audit](https://github.com/rxj0102/var-confidence-audit) | Do banks' trading VaR models hold their stated confidence? | 106 bank-years of 10-K backtests: far too cautious on average, about 2.5 times too many 99% exceptions in 2007, 2008 and 2020 |
-| [13f-timestamp-alpha](https://github.com/rxj0102/13f-timestamp-alpha) | Do hedge funds hide their best ideas in confidential 13F filings? | No: hidden and shown positions earn the same (t 0.11) |
+| [13f-timestamp-alpha](https://github.com/rxj0102/13f-timestamp-alpha) | Do hedge funds hide their best ideas in confidential 13F filings? | No: hidden and shown positions earn the same (t 0.10) |
 | [options-vol-surface](https://github.com/rxj0102/options-vol-surface) | Does VIX overstate the volatility that follows? | Yes: above realized volatility in 84% of 21 day periods since 1995, by 4.1 vol points on average, yet no worse a forecast than GARCH |
 | [factor-research](https://github.com/rxj0102/factor-research) | How much does survivorship bias inflate factor returns? | Rebuilding S&P 500 membership cuts the size spread from 12.5% to 5.7% a year |
 | [Portfolio-VaR](https://github.com/rxj0102/Portfolio-VaR) | Which VaR models survive a walk-forward backtest? | Only GJR-GARCH-t, over 6,474 days |
