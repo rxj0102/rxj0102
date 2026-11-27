@@ -22,21 +22,16 @@ I test ideas on free data and report what holds up, including when nothing does.
 
 | Repo | What it is | Evidence |
 |---|---|---|
-| [hft](https://github.com/rxj0102/hft) | C++20 tick-to-trade engine | Back-to-back replay understates latency: a quiet tick takes 94 ns back to back and 531 ns at 1 ms spacing. Its book matches an independent rebuild of a real Nasdaq ITCH day at every update |
-| [limit-order-book-matching-engine](https://github.com/rxj0102/limit-order-book-matching-engine) | C++20 order book and replay | A full real Nasdaq ITCH day: top of book identical to an independent rebuild at 2.6 million updates |
+| [hft](https://github.com/rxj0102/hft) | C++20 tick-to-trade engine | Back-to-back replay understates latency: a quiet tick takes 94 ns back to back and 531 ns at 1 ms spacing. On a real Nasdaq ITCH day its book matches a separate Python rebuild from the raw feed at every update |
+| [limit-order-book-matching-engine](https://github.com/rxj0102/limit-order-book-matching-engine) | C++20 order book and replay | A full real Nasdaq ITCH day: top of book identical to a separate Python rebuild from the raw feed at 2.6 million updates |
 | [sentinel](https://github.com/rxj0102/sentinel) | Signal platform with a locked holdout | None of four locked signals confirmed out of sample |
 
-### Libraries, checked against independent code
+### Libraries
 
-Stochastic volatility, rough volatility, stochastic rates, exotic Monte Carlo, Malliavin Greeks, mean field games for order books, ergodic BSDEs, optimal transport and path signatures. Checking them against closed forms and independent implementations found and fixed real bugs in six of them.
+Pricing and volatility libraries (stochastic, rough and local volatility, rates, exotic Monte Carlo), checked against closed forms and published benchmarks such as Hull's tables.
 
 ### How I use AI
 
-Most of the code here was written with an AI coding assistant (Claude Code), and the commits say so. I treat its output the way a research desk treats a new signal: it has to pass a test I set before I believe it.
-
-- **What I decide:** the question, the data, and the pass or fail rule, written down before results exist (pre-registered hypotheses in behavioral-pricing-kernel, a locked holdout in sentinel).
-- **What I require:** every number in a README is written by code, and CI fails if the page and the results disagree.
-- **What checking found:** five bugs in the math libraries by comparing them with closed forms and independent code (COS pricing that blew up on long maturities, an inexact Wasserstein distance, a wrong log-signature, a sign error in the HJB solver, a local vol argument that was silently ignored); two overstated t-statistics (overlapping 13F windows, bunched VaR exceptions); a look-ahead in pairs selection; and a VIX comparison that was circular by construction. A second audit of every repository against the literature found twelve more, among them recoveries counted twice in a credit waterfall, a power plant valued with perfect foresight, a deflated Sharpe hurdle on the wrong time scale and a Basel capital charge on the wrong horizon. Each fix is a pull request with the before and after numbers.
-- **Testing the AI itself:** in fed-sentiment-risk-monitor a small open language model, run locally, dates FOMC statements it could have read in training (0.22 probability on the true year against 0.06 by chance) but cannot recall the bond market move on the day (AUC 0.51). Its knowledge stops where its training data ends, so any backtest of a language model signal has to start after that point.
+Most of this code was written with Claude Code, and the commits say so. I set the question, the data and the pass or fail rule before results exist, and every README number is written by code that CI checks. Checking the output against closed forms, benchmarks and second implementations found and fixed over 20 real bugs, each in its own pull request with before and after numbers.
 
 GitHub: [rxj0102](https://github.com/rxj0102) · Site: [rxj0102.github.io](https://rxj0102.github.io)
